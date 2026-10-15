@@ -1,0 +1,4 @@
+# Local HTTPS files and generated viewer assets.
+cert.pem
+key.pem
+splat_files/

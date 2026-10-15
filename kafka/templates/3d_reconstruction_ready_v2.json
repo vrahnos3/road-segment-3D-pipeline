@@ -1,0 +1,19 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC2.1",
+        "content-type": "application/json",
+        "message-type": "3d_reconstruction_status",
+        "producer-id": "CERTH",
+        "correlation-id": null,
+        "message-timestamp": null
+      },
+      "body": {
+        "3d_reconstruction_status": "ready",
+        "url": "https://10.20.20.6:8000"
+      }
+    }
+  ]
+}

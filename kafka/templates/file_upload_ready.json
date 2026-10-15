@@ -1,0 +1,19 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC2.1",
+        "content-type": "application/json",
+        "message-type": "file_upload_status",
+        "producer-id": "ACCELI",
+        "correlation-id": null,
+        "message-timestamp": null
+      },
+      "body": {
+        "file_upload_status": "ready",
+        "file_name": "REC_0059.mp4"
+      }
+    }
+  ]
+}

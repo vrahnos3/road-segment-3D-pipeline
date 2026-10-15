@@ -1,0 +1,63 @@
+# The only required output path is dataset_dir. All blank output paths are
+# derived from it, which keeps every generated artifact inside one folder.
+# Relative dataset output paths are resolved from dataset_dir. Relative input
+# paths such as video_path are resolved from this config directory.
+paths:
+  video_path: /path/to/video.mp4
+  dataset_dir: /path/to/dataset/folder
+
+  # Optional overrides. Leave these null to use the shown dataset-relative path.
+  image_dir: null                 # <dataset_dir>/images
+  colmap_dir: null                # <dataset_dir>/colmap
+  nerfstudio_dir: null            # <dataset_dir> (transforms.json and sparse_pc.ply)
+  splatfacto_output_dir: splatfacto_output_hloc_matched5     # <dataset_dir>/splatfacto_output
+  training_config_path: null      # <splatfacto_output_dir>/config.yml
+  export_dir: null                # <dataset_dir>/export
+  exported_ply_path: null         # <export_dir>/splat.ply
+  splat_output_path: null         # <export_dir>/splat.splat
+
+  # May be either a command available on PATH or a full executable path.
+  converter_executable: /home/panosvrachnos/anaconda3/envs/gsconverter/bin/3dgsconverter
+
+  # Input template only; defaults to kafka/templates/3d_reconstruction_ready_v2.json.
+  kafka_message_path: null
+
+processing:
+  num_frames_target: 100
+  num_downscales: 0
+  skip_image_extraction: false
+
+reconstruction:
+  # Stop before training if registration is insufficient. These are adjustable heuristics.
+  min_registered_images: 10
+  min_registered_fraction: 0.5
+  matching_method: sequential
+  num_matched: 5
+  feature_type: superpoint_aachen
+  matcher_type: superglue
+  camera_model: OPENCV
+  single_camera: true
+  clean: true
+
+training:
+  downscale_factor: 1
+  max_num_iterations: 30000
+
+export:
+  splat_compression_level: 2
+  splat_min_opacity: 100
+
+  # Optional oriented bounding-box crop in Nerfstudio scene coordinates.
+  # All three values must be set together. Set all three to null to disable it.
+  obb_center: null #[0.0, 0.0, 0.0]
+  obb_rotation: null #[0.0, 0.0, 0.0]
+  obb_scale: null #[1.0, 5.0, 1.0]
+
+viewer:
+  # Start the HTTPS web viewer after the complete pipeline or export utility.
+  # The server runs until Ctrl+C and serves splat_output_path as /scene.splat.
+  start_server: true
+  port: 8000
+
+kafka:
+  send_message: true
